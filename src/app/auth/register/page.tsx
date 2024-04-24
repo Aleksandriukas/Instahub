@@ -42,6 +42,11 @@ export default function RegisterPage() {
   const register = async () => {
     console.log(username, password);
 
+    if (!repeatPassword) {
+      setRepeatErrorMessage("Please repeat password");
+      return;
+    }
+
     try {
       const { data, error } = await supabase.auth.signUp({
         email: username,

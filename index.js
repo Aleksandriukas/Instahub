@@ -19,24 +19,20 @@ const context = require.context(
 );
 
 export default function App() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
-
-  supabase.auth.getSession().then((user) => {
-    if (user.accessToken) {
-      setIsSignedIn(true);
-    } else {
-      setIsSignedIn(false);
-    }
-  });
-
-  console.log("isSignedIn", isSignedIn);
-
   return (
     <Router
       context={context}
       linking={{
         prefixes: ["Instahub://"],
-        getInitialURL: () => "Instahub://auth/login",
+        getInitialURL: async () => {
+          const { data } = await supabase.auth.getSession();
+
+          console.log("url", Boolean(data.session.access_token));
+          if (data.session.access_token) {
+            return "Instahub://main/home";
+          }
+          return "Instahub://auth/login";
+        },
       }}
     />
   );
