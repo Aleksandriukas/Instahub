@@ -8,19 +8,18 @@ import {
   useTheme,
 } from "react-native-paper";
 import { TextField } from "../../../components/TextField/TextField";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useLinkTo } from "../../../../charon";
 import { PasswordField } from "../../../components/PasswordField/PasswordField";
 import { supabase } from "../../../supabase/supabase";
 import { useState } from "react";
+import { useLinkTo } from "@react-navigation/native";
 
-export default function LoginPage() {
+export function LoginPage() {
   const { colors } = useTheme();
 
   const linkTo = useLinkTo();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("Aaa@gmail.com");
+  const [password, setPassword] = useState("123456");
 
   const [error, setError] = useState<string>("");
 
@@ -69,6 +68,7 @@ export default function LoginPage() {
             <Logo />
           </View>
           <TextField
+            keyboardType="email-address"
             value={email}
             onChangeText={setEmail}
             label="Username"
@@ -91,7 +91,12 @@ export default function LoginPage() {
           </Button>
         </View>
         <View
-          style={{ flexDirection: "row", justifyContent: "center", gap: 2 }}
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            gap: 2,
+            paddingBottom: 8,
+          }}
         >
           <Text>Do not have an account?</Text>
           <TouchableOpacity

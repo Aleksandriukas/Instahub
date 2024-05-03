@@ -8,7 +8,7 @@ import { PasswordField } from "../../../components/PasswordField/PasswordField";
 import { supabase } from "../../../supabase/supabase";
 import { useState } from "react";
 
-export default function RegisterPage() {
+export function RegisterPage() {
   const { colors } = useTheme();
 
   const insets = useSafeAreaInsets();
@@ -42,8 +42,24 @@ export default function RegisterPage() {
   const register = async () => {
     console.log(username, password);
 
+    if (!username) {
+      setErrorMessage("Please enter a username");
+      return;
+    }
+
+    if (!password) {
+      setErrorMessage("Please enter a password");
+      return;
+    }
+
     if (!repeatPassword) {
       setRepeatErrorMessage("Please repeat password");
+      return;
+    }
+
+    if (password !== repeatPassword) {
+      setRepeatErrorMessage("Passwords do not match");
+      setErrorMessage("Passwords do not match");
       return;
     }
 
@@ -58,6 +74,9 @@ export default function RegisterPage() {
       }
 
       setSuccess(true);
+      setTimeout(() => {
+        goBack();
+      }, 500);
     } catch (error) {
       console.log(error);
       error instanceof Error && setError(error.message);
@@ -85,10 +104,13 @@ export default function RegisterPage() {
           }}
         >
           <TextField
+            keyboardType="email-address"
             value={username}
             onChangeText={setUsername}
             label="Username"
             mode="outlined"
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
           />
           <PasswordField
             value={password}
