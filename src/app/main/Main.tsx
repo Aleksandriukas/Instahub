@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CommonActions } from "@react-navigation/native";
 import { PostsPage } from "./posts/PostsPage";
 import { BottomNavigation, Icon, useTheme } from "react-native-paper";
-import { Settings, ViewStyle } from "react-native";
-import { HomePage } from "./home/HomePage";
+import { ViewStyle } from "react-native";
 import { SettingsPage } from "./settings/SettingsPage";
+import { Home } from "./home/Home";
 
 const Tab = createBottomTabNavigator();
 
@@ -95,7 +95,7 @@ export const Main = () => {
       />
       <Tab.Screen
         name="Home"
-        component={HomePage}
+        component={Home}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <Icon source="account" size={size} color={color} />;

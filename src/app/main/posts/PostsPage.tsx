@@ -1,48 +1,11 @@
 import { FlatList, View, Image, Dimensions } from "react-native";
 import { Appbar, Button, IconButton, Text } from "react-native-paper";
 import { supabase } from "../../../supabase/supabase";
-import { Logo, Stack } from "../../../components";
+import { Logo, Post, Stack } from "../../../components";
 import { useLinkTo } from "@react-navigation/native";
 import { SEPARATOR_COLOR_STYLE } from "../Main";
 import { PostBean } from "../../../beans/PostBean";
 import { useCallback, useEffect, useState } from "react";
-import background from "../../../../assets/image.png";
-type PostProps = {
-  value: PostBean;
-};
-
-const Post = ({ value }: PostProps) => {
-  const [hasLike, setHasLike] = useState(false);
-
-  return (
-    <View>
-      <Image
-        resizeMode="contain"
-        style={{
-          width: "100%",
-          height: Dimensions.get("window").height * 0.6,
-          backgroundColor: "#ffffff09",
-        }}
-        // blurRadius={110}
-        source={{
-          uri: value.photoUrl,
-        }}
-      />
-      <View style={{ flexDirection: "row" }}>
-        <IconButton
-          style={{ marginHorizontal: 0 }}
-          icon={hasLike ? "heart" : "heart-outline"}
-          iconColor={hasLike ? "red" : undefined}
-          onPress={() => {
-            setHasLike((old) => !old);
-          }}
-        />
-        <IconButton style={{ marginHorizontal: 0 }} icon="chat-outline" />
-      </View>
-      <Text>{value.description}</Text>
-    </View>
-  );
-};
 
 export function PostsPage() {
   const linkTo = useLinkTo();
@@ -89,7 +52,11 @@ export function PostsPage() {
       >
         <Logo size="sm"></Logo>
       </Appbar.Header>
-      <FlatList data={posts} renderItem={({ item }) => <Post value={item} />} />
+      <FlatList
+        contentContainerStyle={{ gap: 8 }}
+        data={posts}
+        renderItem={({ item }) => <Post value={item} />}
+      />
     </Stack>
   );
 }
