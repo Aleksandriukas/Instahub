@@ -4,7 +4,7 @@ import {
   useLayoutEffect,
   useState,
 } from "react";
-import { StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
 import { PaperProvider, useTheme } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -45,7 +45,7 @@ export default function MainLayout({ children }: PropsWithChildren<{}>) {
       <NavigationContainer>
         <PaperProvider theme={theme}>
           <SafeAreaProvider>
-            <View
+            <KeyboardAvoidingView
               style={[
                 StyleSheet.absoluteFill,
                 { backgroundColor: colors.surface },
@@ -58,7 +58,7 @@ export default function MainLayout({ children }: PropsWithChildren<{}>) {
                 <Stack.Screen name="auth" component={Auth} />
                 <Stack.Screen name="main" component={Main} />
               </Stack.Navigator>
-            </View>
+            </KeyboardAvoidingView>
           </SafeAreaProvider>
         </PaperProvider>
       </NavigationContainer>

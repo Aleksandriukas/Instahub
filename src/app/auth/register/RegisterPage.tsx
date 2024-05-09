@@ -40,8 +40,6 @@ export function RegisterPage() {
   };
 
   const register = async () => {
-    console.log(username, password);
-
     if (!username) {
       setErrorMessage("Please enter a username");
       return;

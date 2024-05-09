@@ -24,8 +24,6 @@ export const Auth = () => {
 
       const email = jwt.user.user_metadata.email;
 
-      console.log(email);
-
       if (Boolean(email)) {
         setEmail(email);
         linkTo("/main/posts");

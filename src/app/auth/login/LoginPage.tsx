@@ -12,14 +12,18 @@ import { PasswordField } from "../../../components/PasswordField/PasswordField";
 import { supabase } from "../../../supabase/supabase";
 import { useState } from "react";
 import { useLinkTo } from "@react-navigation/native";
+import { useSafeContext } from "@sirse-dev/safe-context";
+import { RootContext } from "../../RootContext";
 
 export function LoginPage() {
   const { colors } = useTheme();
 
+  const { setEmail: setRootEmail } = useSafeContext(RootContext);
+
   const linkTo = useLinkTo();
 
-  const [email, setEmail] = useState("Aaa@gmail.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [error, setError] = useState<string>("");
 
@@ -33,6 +37,7 @@ export function LoginPage() {
       if (error) {
         throw error;
       }
+      setRootEmail(email);
       linkTo("/main/home");
     } catch (error) {
       console.log(error);

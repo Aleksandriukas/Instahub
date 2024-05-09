@@ -55,7 +55,6 @@ export const NewPost = () => {
   };
 
   const onCreate = async () => {
-    console.log(response);
     setLoading(true);
     if (!response?.assets || !response.assets[0].uri) {
       return;
@@ -68,8 +67,6 @@ export const NewPost = () => {
           : response.assets[0].uri.replace("file://", ""),
         "base64"
       );
-
-      console.log("here");
 
       const fileName =
         new Date().getMilliseconds() + response.assets[0].fileName!;

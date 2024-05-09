@@ -63,7 +63,6 @@ export const HomePage = () => {
         throw error;
       }
 
-      console.log(data.length);
       setPosts(data.reverse() ?? []);
     } catch (error) {
       console.log(error);
@@ -134,7 +133,6 @@ const MinifiedPost = ({ value, onDelete }: PostProps) => {
       <TouchableOpacity
         onLongPress={() => setVisible(true)}
         onPress={() => {
-          console.log("Selected post");
           setSelectedPost(value);
           linkTo("/PostInfo");
         }}
