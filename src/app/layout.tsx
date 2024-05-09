@@ -28,6 +28,7 @@ const theme = {
     primary: "#d58900",
     onPrimary: "#000",
     onSurface: "#fff",
+    onSurfaceVariant: "#fff",
     surface: "#000",
     background: "#000",
     secondaryContainer: "#ec9f30",

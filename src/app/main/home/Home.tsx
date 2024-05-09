@@ -4,6 +4,7 @@ import { PostInfoPage } from "./postInfo/PostInfoPage";
 import { HomeContext } from "./HomeContext";
 import { useState } from "react";
 import { PostBean } from "../../../beans/PostBean";
+import { NewPost } from "./newPost/NewPost";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export const Home = () => {
       >
         <Stack.Screen name="homePage" component={HomePage} />
         <Stack.Screen name="PostInfo" component={PostInfoPage} />
+        <Stack.Screen name="newPost" component={NewPost} />
       </Stack.Navigator>
     </HomeContext.Provider>
   );
